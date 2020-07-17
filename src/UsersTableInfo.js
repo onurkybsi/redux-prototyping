@@ -1,6 +1,20 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { saveEntity, deleteEntity } from "./store";
+import {USERS} from "./store/models";
 
-export default class UsersTableInfo extends Component {
+const mapStateToProps = (datasets) => {
+  users: datasets.users
+}
+
+const mapDispatchToProps = {
+  saveUser: saveEntity,
+  deleteUser: deleteEntity
+}
+
+const connectFunction = connect(mapStateToProps, mapDispatchToProps);
+
+export const UsersTableInfo = connectFunction(class extends Component {
   render() {
     return (
       <table className="table">
@@ -15,7 +29,7 @@ export default class UsersTableInfo extends Component {
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>Mark</td>
+            <td>{users[0].email}</td>
             <td>Otto</td>
             <td>
               <button type="button" className="btn btn-primary">
@@ -34,4 +48,4 @@ export default class UsersTableInfo extends Component {
       </table>
     );
   }
-}
+});

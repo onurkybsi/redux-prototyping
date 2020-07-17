@@ -1,7 +1,9 @@
 import React from "react";
 import "./App.css";
 import Form from "./Form";
-import UsersTableInfo from "./UsersTableInfo"
+import { UsersTableInfo } from "./UsersTableInfo";
+import { Provider } from "react-redux";
+import dataSets  from "./store";
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
           <Form />
         </div>
         <div class="col-sm">
-          <UsersTableInfo />
+          <Provider store={dataSets}>
+            <UsersTableInfo />
+          </Provider>
         </div>
       </div>
     </div>
