@@ -25,7 +25,7 @@ export const dataSets = {
     {
       id: 5,
       email: "faruk@outlook.com",
-      password: "sevgul1234",
+      password: "faruk1234",
     },
   ],
 };

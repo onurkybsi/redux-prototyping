@@ -23,6 +23,6 @@ export default function (dataSet, action) {
         ),
       };
     default:
-      return dataSet || dataSets[action.model];
+      return dataSet || dataSets;
   }
 }
