@@ -24,5 +24,5 @@ export const saveEntity = (model, payload) => {
 export const deleteEntity = (model, object) => ({
   type: DELETE,
   model: model,
-  payload: object.id,
+  payload: object,
 });

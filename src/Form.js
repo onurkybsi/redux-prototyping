@@ -20,14 +20,8 @@ export default class Form extends Component {
             placeholder="Password"
           />
         </div>
-        <div className="form-group form-check">
-          <input type="checkbox" className="form-check-input" id="checkbox" />
-          <label className="form-check-label" for="checkbox">
-            Check me out
-          </label>
-        </div>
         <button type="submit" className="btn btn-primary">
-          Submit
+          Save
         </button>
       </form>
     );

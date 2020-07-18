@@ -16,6 +16,10 @@ const connectFunction = connect(mapStateToProps, mapDispatchToProps);
 
 export const UsersTableInfo = connectFunction(
   class extends Component {
+    deleteUser = (user) => {
+      this.props.deleteUser(USERS, user.id);
+    };
+
     render() {
       return (
         <table className="table">
@@ -29,7 +33,7 @@ export const UsersTableInfo = connectFunction(
           </thead>
           <tbody>
             {this.props.users.map((user, i) => (
-              <tr>
+              <tr id={user.id}>
                 <th scope="row">{i + 1}</th>
                 <td>{user.email}</td>
                 <td>{user.password}</td>
@@ -41,6 +45,7 @@ export const UsersTableInfo = connectFunction(
                     type="button"
                     className="btn btn-danger"
                     style={{ marginLeft: "5px" }}
+                    onClick={() => this.deleteUser(user)}
                   >
                     Delete
                   </button>
