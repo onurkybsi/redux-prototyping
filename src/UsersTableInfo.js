@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { saveEntity, deleteEntity, setSelectedUserId } from "./store";
+import {
+  saveEntity,
+  deleteEntity,
+  setProcessType,
+  setSelectedUser,
+} from "./store";
 import { USERS } from "./store/models";
+import { UPDATE_PROCESS, CREATE_PROCESS } from "./store/processType";
 
 const mapStateToProps = (dataSets) => ({
   users: dataSets.modelData[USERS],
@@ -11,7 +17,8 @@ const mapStateToProps = (dataSets) => ({
 const mapDispatchToProps = {
   saveUser: saveEntity,
   deleteEntity: deleteEntity,
-  setSelectedUserId: setSelectedUserId,
+  setProcessType: setProcessType,
+  setSelectedUser: setSelectedUser,
 };
 
 const connectFunction = connect(mapStateToProps, mapDispatchToProps);
@@ -20,10 +27,17 @@ export const UsersTableInfo = connectFunction(
   class extends Component {
     deleteUser = (user) => {
       this.props.deleteEntity(USERS, user.id);
+      this.props.setSelectedUser(null);
     };
 
     editUser = (user) => {
-      this.props.setSelectedUserId(user.id);
+      this.props.setProcessType(UPDATE_PROCESS);
+      this.props.setSelectedUser(user);
+    };
+
+    createUser = () => {
+      this.props.setProcessType(CREATE_PROCESS);
+      this.props.setSelectedUser(null);
     };
 
     render() {
@@ -46,7 +60,15 @@ export const UsersTableInfo = connectFunction(
               </thead>
               <tbody>
                 {this.props.users?.map((user, i) => (
-                  <tr key={user.id}>
+                  <tr
+                    key={user.id}
+                    style={{
+                      borderLeft:
+                        user.id == this.props.stateData.selectedUser?.id
+                          ? "3px solid #5A6268"
+                          : "",
+                    }}
+                  >
                     <th scope="row">{i + 1}</th>
                     <td>{user.email}</td>
                     <td>{user.password}</td>
@@ -76,6 +98,7 @@ export const UsersTableInfo = connectFunction(
             type="button"
             className="btn btn-success"
             style={{ float: "right" }}
+            onClick={this.createUser}
           >
             Create
           </button>

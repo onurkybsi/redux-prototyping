@@ -1,12 +1,17 @@
-import { SET_SELECTED_USER_ID } from "./stateActions";
 import { dataSets } from "../dataSets";
+import { SET_PROCESS_TYPE, SET_SELECTED_USER } from "./stateActions";
 
 export default function (dataSet, action) {
   switch (action.type) {
-    case SET_SELECTED_USER_ID:
+    case SET_PROCESS_TYPE:
       return {
         ...dataSet,
-        selectedUserId: action.payload,
+        processType: action.payload,
+      };
+    case SET_SELECTED_USER:
+      return {
+        ...dataSet,
+        selectedUser: action.payload,
       };
     default:
       return dataSet || dataSets.stateData;

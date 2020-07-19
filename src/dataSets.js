@@ -1,4 +1,5 @@
 import { USERS } from "./store/models";
+import { UPDATE_PROCESS, CREATE_PROCESS } from "./store/processType";
 
 export const dataSets = {
   modelData: {
@@ -32,6 +33,7 @@ export const dataSets = {
     ],
   },
   stateData: {
-    selectedUserId: -1,
+    processType: CREATE_PROCESS,
+    selectedUser: null,
   },
 };

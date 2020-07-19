@@ -9,4 +9,4 @@ export default createStore(
   })
 );
 export { saveEntity, deleteEntity } from "./modelActionCreators";
-export { setSelectedUserId } from "./stateActions";
+export { setProcessType, setSelectedUser } from "./stateActions";
