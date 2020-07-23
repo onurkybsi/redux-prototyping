@@ -26,8 +26,14 @@ const connectFunction = connect(mapStateToProps, mapDispatchToProps);
 export const UsersTableInfo = connectFunction(
   class extends Component {
     deleteUser = (user) => {
+      let nextId = this.props.stateData.selectedUser.id + 1;
       this.props.deleteEntity(USERS, user.id);
-      this.props.setSelectedUser(null);
+
+      this.props.setSelectedUser({
+        id: nextId + 1,
+        email: "",
+        password: "",
+      });
     };
 
     editUser = (user) => {
@@ -39,6 +45,10 @@ export const UsersTableInfo = connectFunction(
       this.props.setProcessType(CREATE_PROCESS);
 
       let newUserId = -1;
+      this.props.users.forEach((user) => {
+        newUserId = user.id > newUserId ? user.id : newUserId;
+      });
+
       this.props.setSelectedUser({
         id: newUserId + 1,
         email: "",
