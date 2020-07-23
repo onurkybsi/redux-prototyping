@@ -37,7 +37,13 @@ export const UsersTableInfo = connectFunction(
 
     createUser = () => {
       this.props.setProcessType(CREATE_PROCESS);
-      this.props.setSelectedUser(null);
+
+      let newUserId = -1;
+      this.props.setSelectedUser({
+        id: newUserId + 1,
+        email: "",
+        password: "",
+      });
     };
 
     render() {
@@ -64,7 +70,7 @@ export const UsersTableInfo = connectFunction(
                     key={user.id}
                     style={{
                       borderLeft:
-                        user.id == this.props.stateData.selectedUser?.id
+                        user.id === this.props.stateData.selectedUser?.id
                           ? "3px solid #5A6268"
                           : "",
                     }}

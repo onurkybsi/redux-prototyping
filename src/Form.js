@@ -24,18 +24,10 @@ const connectFunction = connect(mapStateToProps, mapDispatchToProps);
 
 export const Form = connectFunction(
   class extends Component {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        email: "",
-      };
-    }
-
     changeInputValue = (e) => {
-      this.setState({
-        ...this.state,
-        email: e.target.value,
+      this.props.setSelectedUser({
+        ...this.props.stateData.selectedUser,
+        [e.target.name]: e.target.value,
       });
     };
 
@@ -46,9 +38,10 @@ export const Form = connectFunction(
             <label htmlFor="email">Email address</label>
             <input
               type="email"
+              name="email"
               className="form-control"
               placeholder="Enter email"
-              value={this.state.email}
+              value={this.props.stateData.selectedUser.email}
               onChange={this.changeInputValue}
             />
           </div>
@@ -56,8 +49,11 @@ export const Form = connectFunction(
             <label htmlFor="password">Password</label>
             <input
               type="password"
+              name="password"
               className="form-control"
               placeholder="Password"
+              value={this.props.stateData.selectedUser.password}
+              onChange={this.changeInputValue}
             />
           </div>
           <button type="submit" className="btn btn-primary">
